@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.content.Intent
 import android.os.Bundle
 import android.telecom.Call.Details
 import android.widget.ImageButton
@@ -21,6 +22,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
@@ -68,9 +70,17 @@ class MainActivity : ComponentActivity() {
                         }
 
                         composable("about"){
-                            AboutScreen(onNavigateUp = {
-                                navController.popBackStack()
-                            })
+//                            AboutScreen(onNavigateUp = {
+//                                navController.popBackStack()
+//                            })
+                            // context: simple call to working activity
+                            // to move from one activity to another or another application we use intents
+                          // fetching local context
+                            val mContext = LocalContext.current
+                            mContext.startActivity(Intent(
+                                mContext, BottomNavigationActivity::class.java
+                            ))
+
                         }
 
                         composable("details/id={id}?name={name}",
